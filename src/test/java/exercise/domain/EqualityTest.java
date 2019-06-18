@@ -3,9 +3,12 @@ package exercise.domain;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
+import java.time.Instant;
 import java.util.function.Supplier;
 
 import org.junit.jupiter.api.Test;
+
+import exercise.dto.BillingDto;
 
 public class EqualityTest {
 
@@ -55,6 +58,15 @@ public class EqualityTest {
         () -> new UnknownPricingType()
     );
   }
+
+  @Test
+  public void billingDtoTest() {
+    Instant now = Instant.now();
+    testEquality(
+        () -> new BillingDto(1.5, now),
+        () -> new BillingDto(2.5, now)
+     );
+   }
 
   private <T> void testEquality(Supplier<T> supplier1, Supplier<T> supplier2) {
     // test that objets are equals to themselves
