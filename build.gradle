@@ -10,6 +10,8 @@ apply plugin: "java"
 apply plugin: "org.springframework.boot"
 apply plugin: "io.spring.dependency-management"
 
+apply from: "sonar.gradle"
+
 // use maven central for downloading dependencies
 repositories {
   mavenCentral()
