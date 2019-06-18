@@ -42,12 +42,6 @@ public class HourFeePricingPolicy implements PricingPolicy {
     this.hourFee = hourFee;
   }
 
-  /**
-   * Compute the bill for a car parked in a given spot.
-   * @param spot The spot entity.
-   * @return The amount.
-   * @throws EmptyParkingSpotException if no car is parked in the given spot.
-   */
   @Override
   public double computeBill(ParkingSpot spot) {
     if (spot.getOccupiedSince() == null || spot.getOccupiedBy() == null) {

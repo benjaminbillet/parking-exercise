@@ -24,7 +24,7 @@ public class BillingService {
   /**
    * Compute the bill for a car parked in a given spot.
    * @param spotId The spot id.
-   * @return The amount.
+   * @return The computed amount.
    */
   @Transactional(readOnly = true)
   public Optional<Double> computeBill(Long spotId) {
@@ -35,7 +35,7 @@ public class BillingService {
   /**
    * Compute the bill for a car parked in a given spot.
    * @param spot The spot entity.
-   * @return The amount.
+   * @return The computed amount.
    */
   @Transactional(readOnly = true)
   public double computeBill(ParkingSpot spot) {
