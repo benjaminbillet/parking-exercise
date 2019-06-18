@@ -94,10 +94,10 @@ public class ParkingSpotAllocationService {
       ParkingSpot spot = car.getOccupiedSpot();
       if (parkingId == null) {
         // to be consistent with repository exceptions
-        throw new InvalidDataAccessApiUsageException("parkingId is null");
+        throw new InvalidDataAccessApiUsageException("Parking id is null");
       }
       if (spot == null || !spot.getParking().getId().equals(parkingId)) {
-        throw new IllegalStateException();
+        throw new IllegalStateException("No parking spot associated to this car");
       }
 
       double charged = billingService.computeBill(spot);

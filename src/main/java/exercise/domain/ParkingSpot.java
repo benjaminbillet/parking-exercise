@@ -3,6 +3,7 @@ package exercise.domain;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
+import java.util.Optional;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -132,6 +133,7 @@ public class ParkingSpot implements Serializable {
   @Override
   public String toString() {
     return "ParkingSpot [id=" + id + ", label=" + label + ", occupiedSince=" + occupiedSince + ", occupiedBy="
-        + occupiedBy + ", parking=" + parking + ", type=" + type + "]";
+        + Optional.of(occupiedBy).map(Car::getId).orElse(null) + ", parking=" + parking 
+        + ", type=" + type + "]";
   }
 }

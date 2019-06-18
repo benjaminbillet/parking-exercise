@@ -153,8 +153,6 @@ public class ParkingSpotAllocationServiceTest {
     spotType.setLabel("electric-50kWh");
     spotType = spotTypeRepository.save(spotType);
 
-    System.out.println(parkingRepository.findAll());
-
     ParkingSpot spot = new ParkingSpot();
     spot.setLabel("1A");
     spot.setParking(parking);

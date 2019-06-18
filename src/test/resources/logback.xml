@@ -4,7 +4,7 @@
 <configuration scan="true">
   <include resource="org/springframework/boot/logging/logback/base.xml"/>
 
-  <logger name="my.app" level="INFO"/>
+  <logger name="exercise" level="INFO"/>
 
   <logger name="javax.activation" level="WARN"/>
   <logger name="javax.xml.bind" level="WARN"/>

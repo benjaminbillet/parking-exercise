@@ -1,0 +1,100 @@
+swagger: "2.0"
+info:
+  description: "Parking Toll API"
+  version: "1.0.0"
+  title: "Parking Toll API"
+  contact:
+    email: "contact@benjaminbillet.fr"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+basePath: "/api"
+tags:
+- name: "parking"
+  description: "Parking checkin/checkout primitives"
+schemes:
+- "http"
+paths:
+  /parking/{parkingId}/spots/byType/{spotType}:
+    post:
+      tags:
+      - "parking"
+      summary: "Checkin - find a free parking spot"
+      description: "Looks for a free parking spot matching the specified type"
+      operationId: "checkin"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "parkingId"
+        in: "path"
+        description: "ID of targeted parking"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "spotType"
+        in: "path"
+        description: "ID of requested parking spot type"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "Checkin successful"
+          schema:
+            $ref: "#/definitions/ParkingSpotRegistration"
+        404:
+          description: "No free parking spot found"
+  /parking/{parkingId}/cars/{carId}:
+    delete:
+      tags:
+      - "parking"
+      summary: "Checkout - leave a parking spot"
+      description: "Leave the parking spot and bill the customer"
+      operationId: "checkout"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "parkingId"
+        in: "path"
+        description: "ID of targeted parking"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "carId"
+        in: "path"
+        description: "ID of car"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "Checkout successful"
+          schema:
+            $ref: "#/definitions/Billing"
+        404:
+          description: "Car registration not found"
+definitions:
+  ParkingSpotRegistration:
+    type: "object"
+    properties:
+      spotId:
+        type: "integer"
+        format: "int64"
+        description: "ID of the allocated spot"
+      spotLabel:
+        type: "string"
+        description: "Label of the allocated spot"
+      carId:
+        type: "integer"
+        format: "int64"
+        description: "Auto-generated car ID, that will be used for checkout"
+  Billing:
+    type: "object"
+    properties:
+      charged:
+        type: "number"
+        format: "double"
+        description: "Amount charged"
+      time:
+        type: "date"
+        description: "Billing time"
