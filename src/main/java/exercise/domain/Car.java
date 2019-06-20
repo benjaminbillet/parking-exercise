@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -25,6 +26,7 @@ public class Car implements Serializable {
   private Long id;
 
   @OneToOne(mappedBy="occupiedBy")
+  @JoinColumn
   private ParkingSpot occupiedSpot;
   
   public Car(Long id, ParkingSpot occupiedSpot) {

@@ -1,6 +1,13 @@
 # Parking Toll Exercise
 Note: this project is based on a bigger demo project created for educational purposes: https://github.com/benjaminbillet/spring-architecture-example
 
+Table of Content (generated with [markdown-toc](http://ecotrust-canada.github.io/markdown-toc))
+- [How to run in dev mode?](#how-to-run-in-dev-mode-)
+- [How to run the unit tests?](#how-to-run-the-unit-tests-)
+- [How to setup code analysis?](#how-to-setup-code-analysis-)
+- [How to build and deploy for production?](#how-to-build-and-deploy-for-production-)
+- [The API in a nutshell](#the-api-in-a-nutshell)
+- [Architecture Overview](#architecture-overview)
 
 ## How to run in dev mode?
 1. make sure you have [mariadb](https://mariadb.com) installed.
@@ -61,3 +68,11 @@ curl -X DELETE http://localhost:8080/api/parking/{parkingId}/cars/{carId} -v
 ```
 
 Check also `src/main/java/resources/swagger.yaml` for the full specification.
+
+## Architecture Overview
+Layers:
+- `repository`, `domain`, `dto` packages respectively contains the data access layer, the domain entities and the data transfer objects.
+- `service` package contains the two services of the application: spot allocation and billing. Both are well-separated, ensuring that the billing service could be externalized as a separated micro-service when more complex billing use-case will be introduced (e.g., a rule engine with various pricing policies).
+  - Parking spot allocation service: provide `checkin` (find a free spot of a given type and allocate it for the car) and `checkout` (free a previously allocated spot and bill the customer) primitives.
+  - Billing service: provide `computeBill` primitive, that relies on a factory for building pricing policy implementations.
+- `api` package contains the REST controllers that wrap the parking spot allocation service.

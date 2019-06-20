@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -37,14 +38,17 @@ public class ParkingSpot implements Serializable {
   private Instant occupiedSince;
 
   @OneToOne
+  @JoinColumn
   private Car occupiedBy;
   
   @NotNull
   @ManyToOne
+  @JoinColumn
   private Parking parking;
 
   @NotNull
   @ManyToOne
+  @JoinColumn
   private ParkingSpotType type;
 
   public ParkingSpot(Long id, String label, Instant occupiedSince, Car occupiedBy, Parking parking,
