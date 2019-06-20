@@ -69,6 +69,10 @@ curl -X DELETE http://localhost:8080/api/parking/{parkingId}/cars/{carId} -v
 
 Check also `src/main/java/resources/swagger.yaml` for the full specification.
 
+Other useful endpoints (restricted to local calls only):
+- `/actuator/prometheus`: Prometheus-formatted metrics. You can setup a [local Prometheus](https://prometheus.io/docs/prometheus/latest/getting_started) in a few minutes.
+- `/actuator/health`: A health probe, that can be used to create Kubernetes liveness or readiness probes.
+
 ## Architecture Overview
 Layers:
 - `repository`, `domain`, `dto` packages respectively contains the data access layer, the domain entities and the data transfer objects.

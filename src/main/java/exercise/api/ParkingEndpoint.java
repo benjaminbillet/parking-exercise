@@ -14,11 +14,12 @@ import exercise.config.ApplicationProperties;
 import exercise.dto.BillingDto;
 import exercise.dto.ParkingSpotDto;
 import exercise.service.ParkingSpotAllocationService;
+import io.micrometer.core.annotation.Timed;
 
 @RestController
 @RequestMapping("/api/parking")
 public class ParkingEndpoint {
-  
+
   private ParkingSpotAllocationService allocationService;
 
   private ApplicationProperties config;
@@ -29,6 +30,7 @@ public class ParkingEndpoint {
   }
 
   @PostMapping("/{parkingId}/spots/byType/{spotType}")
+  @Timed
   public ResponseEntity<ParkingSpotDto> checkin(@PathVariable Long parkingId, @PathVariable Long spotType) {
     Optional<ParkingSpotDto> dto = allocationService.checkin(parkingId, spotType);
     return ResponseEntity.ok(dto.orElseThrow(
@@ -36,6 +38,7 @@ public class ParkingEndpoint {
   }
 
   @DeleteMapping("/{parkingId}/cars/{carId}")
+  @Timed
   public ResponseEntity<BillingDto> checkout(@PathVariable Long parkingId, @PathVariable Long carId) {
     Optional<BillingDto> dto = allocationService.checkout(parkingId, carId);
     return ResponseEntity.ok(dto.orElseThrow(

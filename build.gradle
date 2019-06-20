@@ -63,6 +63,7 @@ dependencies {
   implementation "org.mariadb.jdbc:mariadb-java-client"
 
   // caching
+  implementation "org.springframework.boot:spring-boot-starter-cache"
   implementation "javax.cache:cache-api"
   implementation "org.ehcache:ehcache"
   implementation "org.hibernate:hibernate-jcache"

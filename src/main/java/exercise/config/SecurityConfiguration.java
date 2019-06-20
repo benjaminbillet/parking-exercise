@@ -32,6 +32,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
       .frameOptions().disable()
     .and()
       .authorizeRequests()
-      .antMatchers("/api/**").permitAll();
+      .antMatchers("/api/**").permitAll()
+      // restrict the monitoring endpoint to local access
+      .antMatchers("/actuator/**").hasIpAddress("127.0.0.1");
   }
 }
